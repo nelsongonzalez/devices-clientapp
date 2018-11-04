@@ -4,6 +4,10 @@ import MaterialIcon from '@material/react-material-icon';
 
 class DeviceList extends Component {
 
+  state = {
+    devices: {}
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -25,8 +29,6 @@ class DeviceList extends Component {
                 <option value='ws'>Windows Server</option>
                 <option value='m'>Mac</option>
               </Select>
-            </GridCell>
-            <GridCell>
               <Select label='Sort by' value={this.state.sortBy} outlined onChange={this.changeSortBy}>
                 <option value='hddc'>HDD Capacity</option>
               </Select>
@@ -34,6 +36,17 @@ class DeviceList extends Component {
           </GridContent>
           <GridContent>
             <List>
+              {this.state.devices ? (
+                this.state.devices.map((device) => (
+                  <ListItem key={device.id} props={{
+                    systemName: device["system_name"],
+                    type: device.type,
+                    hddCapacity: device["hdd_capacity"]
+                  }}/>
+                ))
+              ) : (
+                <div/>
+              )}
               <ListItem props={{systemName: "SUSAN-DESKTOP", type: "Windows Workstatop", hddCapacity: "128GB"}}/>
               <ListItem props={{systemName: "MAC-LOCAL-FREDY", type: "Mac", hddCapacity: "256GB"}}/>
             </List>
@@ -42,6 +55,14 @@ class DeviceList extends Component {
       </Root>
     );
   }
+
+  componentDidMount() {
+    fetch('http://localhost:3000/devices')
+      .then((response) => response.json())
+      .then((devices) => {
+        this.setState({devices: devices})
+      });
+  };
 
   changeDeviceType(e) {
     this.setState({type: e.target.deviceType});
@@ -72,7 +93,7 @@ const GridContent = (props) => (
 );
 
 const GridCell = (props) => (
-  <div className="mdc-layout-grid__cell" {...props}>
+  <div style={{textAlign: "right"}} className="mdc-layout-grid__cell mdc-layout-grid__cell--span-12" {...props}>
 
   </div>
 );

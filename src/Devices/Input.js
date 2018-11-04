@@ -100,7 +100,7 @@ const GridContent = (props) => (
 );
 
 const GridCell = (props) => (
-  <div className="demo-cell mdc-layout-grid__cell mdc-layout-grid__cell--span-12" {...props}>
+  <div style={{textAlign: "center"}} className="demo-cell mdc-layout-grid__cell mdc-layout-grid__cell--span-12" {...props}>
 
   </div>
 );
