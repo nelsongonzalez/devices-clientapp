@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom'
 import Select from '@material/react-select';
 import MaterialIcon from '@material/react-material-icon';
 
@@ -47,8 +48,6 @@ class DeviceList extends Component {
               ) : (
                 <div/>
               )}
-              <ListItem props={{systemName: "SUSAN-DESKTOP", type: "Windows Workstatop", hddCapacity: "128GB"}}/>
-              <ListItem props={{systemName: "MAC-LOCAL-FREDY", type: "Mac", hddCapacity: "256GB"}}/>
             </List>
           </GridContent>
         </Grid>
@@ -106,15 +105,15 @@ const List = (props) => (
   </div>
 );
 
-const ListItem = ({props}) => {
+const ListItem = withRouter(({props, history}) => {
   return (
-    <li className="mdc-list-item">
-    <span className="mdc-list-item__text">
-      <span className="mdc-list-item__primary-text">{props.systemName}</span>
-      <span className="mdc-list-item__secondary-text">{props.type}, {props.hddCapacity}</span>
-    </span>
+    <li className="mdc-list-item" onClick={() => history.push('/input')}>
+      <span className="mdc-list-item__text">
+        <span className="mdc-list-item__primary-text">{props.systemName}</span>
+        <span className="mdc-list-item__secondary-text">{props.type} - {props.hddCapacity}GB</span>
+      </span>
       <MaterialIcon className="mdc-list-item__meta material-icons" icon='more_vert'/>
     </li>)
-};
+});
 
 export default DeviceList;

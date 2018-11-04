@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom'
 import TextField, { Input } from '@material/react-text-field';
 import Select from '@material/react-select';
 import Button from '@material/react-button';
@@ -74,6 +75,7 @@ class DeviceInput extends Component {
   }
 
   handleSave(e) {
+    this.props.history.push('/');
   }
 
   handleClose(e) {

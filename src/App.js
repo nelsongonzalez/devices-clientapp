@@ -17,7 +17,6 @@ class App extends Component {
               <Route exact path="/" component={DeviceList}/>
               <Route exact path="/input" component={DeviceInput}/>
             </Main>
-            <Link to="/input/">Nuevo</Link>
           </TopAppBarFixedAdjust>
         </Root>
       </Router>
