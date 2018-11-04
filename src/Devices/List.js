@@ -12,11 +12,11 @@ class DeviceList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      deviceType: 'ww',
-      sortBy: 'hddc',
+      deviceType: 'WINDOWS_WORKSTATION',
+      sortBy: 'HDD_CAPACITY',
     };
-    this.changeDeviceType = this.changeDeviceType.bind(this);
-    this.changeSortBy = this.changeSortBy.bind(this);
+    this._changeDeviceType = this._changeDeviceType.bind(this);
+    this._changeSortBy = this._changeSortBy.bind(this);
   }
 
   render() {
@@ -25,13 +25,13 @@ class DeviceList extends Component {
         <Grid>
           <GridContent>
             <GridCell>
-              <Select label='Device type' value={this.state.deviceType} outlined onChange={this.changeDeviceType}>
-                <option value='ww'>Windows Workstation</option>
-                <option value='ws'>Windows Server</option>
-                <option value='m'>Mac</option>
+              <Select label='Device type' value={this.state.deviceType} outlined onChange={this._changeDeviceType}>
+                <option value='WINDOWS_WORKSTATION'>Windows Workstation</option>
+                <option value='WINDOWS_SERVER'>Windows Server</option>
+                <option value='MAC'>Mac</option>
               </Select>
-              <Select label='Sort by' value={this.state.sortBy} outlined onChange={this.changeSortBy}>
-                <option value='hddc'>HDD Capacity</option>
+              <Select label='Sort by' value={this.state.sortBy} outlined onChange={this._changeSortBy}>
+                <option value='HDD_CAPACITY'>HDD Capacity</option>
               </Select>
             </GridCell>
           </GridContent>
@@ -40,6 +40,7 @@ class DeviceList extends Component {
               {this.state.devices ? (
                 this.state.devices.map((device) => (
                   <ListItem key={device.id} props={{
+                    id: device.id,
                     systemName: device["system_name"],
                     type: device.type,
                     hddCapacity: device["hdd_capacity"]
@@ -63,11 +64,11 @@ class DeviceList extends Component {
       });
   };
 
-  changeDeviceType(e) {
+  _changeDeviceType(e) {
     this.setState({type: e.target.deviceType});
   }
 
-  changeSortBy(e) {
+  _changeSortBy(e) {
     this.setState({type: e.target.sortBy});
   }
 
@@ -107,7 +108,7 @@ const List = (props) => (
 
 const ListItem = withRouter(({props, history}) => {
   return (
-    <li className="mdc-list-item" onClick={() => history.push('/input')}>
+    <li className="mdc-list-item" onClick={() => history.push(`/update/${props.id}`)}>
       <span className="mdc-list-item__text">
         <span className="mdc-list-item__primary-text">{props.systemName}</span>
         <span className="mdc-list-item__secondary-text">{props.type} - {props.hddCapacity}GB</span>

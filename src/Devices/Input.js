@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom'
 import TextField, { Input } from '@material/react-text-field';
 import Select from '@material/react-select';
 import Button from '@material/react-button';
@@ -9,15 +8,17 @@ class DeviceInput extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      systemName: '',
-      type: 'ww',
-      hddCapacity: undefined,
+      systemName: "",
+      type: "WINDOWS_WORKSTATION",
+      hddCapacity: "",
+      deviceId: props.match.params.deviceId
+      // isNew: /^new/i.test(props.match.path)
     };
-    this.changeSystemName = this.changeSystemName.bind(this);
-    this.changeType = this.changeType.bind(this);
-    this.changeHddCapacity = this.changeHddCapacity.bind(this);
-    this.handleSave = this.handleSave.bind(this);
-    this.handleClose = this.handleClose.bind(this);
+    this._changeSystemName = this._changeSystemName.bind(this);
+    this._changeType = this._changeType.bind(this);
+    this._changeHddCapacity = this._changeHddCapacity.bind(this);
+    this._handleSave = this._handleSave.bind(this);
+    this._handleClose = this._handleClose.bind(this);
   }
 
   render() {
@@ -27,32 +28,32 @@ class DeviceInput extends Component {
           <GridContent>
             <GridCell>
               <TextField label='System Name' outlined>
-                <Input value={this.state.systemName} onChange={this.changeSystemName}/>
+                <Input value={this.state.systemName} onChange={this._changeSystemName}/>
               </TextField>
             </GridCell>
           </GridContent>
           <GridContent>
             <GridCell>
-              <Select label='Type' value={this.state.type} outlined onChange={this.changeType}>
-                <option value='ww'>Windows Workstation</option>
-                <option value='ws'>Windows Server</option>
-                <option value='m'>Mac</option>
+              <Select label='Type' value={this.state.type} outlined onChange={this._changeType}>
+                <option value='WINDOWS_WORKSTATION'>Windows Workstation</option>
+                <option value='WINDOWS_SERVER'>Windows Server</option>
+                <option value='MAC'>Mac</option>
               </Select>
             </GridCell>
           </GridContent>
           <GridContent>
             <GridCell>
               <TextField label='HDD Capacity (GB)' outlined>
-                <Input value={this.state.hddCapacity} onChange={this.changeHddCapacity}/>
+                <Input value={this.state.hddCapacity} onChange={this._changeHddCapacity}/>
               </TextField>
             </GridCell>
           </GridContent>
           <GridContent>
             <GridCell>
-              <Button onClick={this.handleSave} outlined>
+              <Button onClick={this._handleSave} outlined>
                 Save
               </Button>
-              <Button onClick={this.handleClose}>
+              <Button onClick={this._handleClose}>
                 Close
               </Button>
             </GridCell>
@@ -62,23 +63,59 @@ class DeviceInput extends Component {
     );
   }
 
-  changeSystemName(e) {
+  componentDidMount() {
+    if (this.state.deviceId) {
+      fetch(`http://localhost:3000/devices/${this.state.deviceId}`)
+        .then((response) => response.json())
+        .then((device) => {
+          this.setState({systemName: device["system_name"], type: device.type, hddCapacity: device["hdd_capacity"]});
+        });
+    } else {
+      this.setState({systemName: "", type: "", hddCapacity: ""});
+    }
+  };
+
+  _changeSystemName(e) {
     this.setState({systemName: e.target.value});
   }
 
-  changeType(e) {
+  _changeType(e) {
     this.setState({type: e.target.value});
   }
 
-  changeHddCapacity(e) {
+  _changeHddCapacity(e) {
     this.setState({hddCapacity: e.target.value});
   }
 
-  handleSave(e) {
+  _handleSave() {
+    if (this.state.deviceId) {
+      this._update();
+    } else {
+      this._create();
+    }
     this.props.history.push('/');
   }
 
-  handleClose(e) {
+  _create() {
+
+  }
+
+  _update() {
+    fetch(`http://localhost:3000/devices/${this.state.deviceId}`, {
+      method: "PUT",
+      body: JSON.stringify({
+        system_name: this.state.systemName,
+        type: this.state.type,
+        hdd_capacity: this.state.hddCapacity
+      }),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then((response) => console.log(response));
+  }
+
+  _handleClose() {
+    this.props.history.push('/');
   }
 
 }
@@ -102,7 +139,8 @@ const GridContent = (props) => (
 );
 
 const GridCell = (props) => (
-  <div style={{textAlign: "center"}} className="demo-cell mdc-layout-grid__cell mdc-layout-grid__cell--span-12" {...props}>
+  <div style={{textAlign: "center"}}
+       className="demo-cell mdc-layout-grid__cell mdc-layout-grid__cell--span-12" {...props}>
 
   </div>
 );

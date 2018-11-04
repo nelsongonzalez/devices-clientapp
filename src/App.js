@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import TopAppBar, { TopAppBarFixedAdjust } from '@material/react-top-app-bar';
 import DeviceList from './Devices/List';
 import DeviceInput from './Devices/Input';
@@ -15,7 +15,8 @@ class App extends Component {
           <TopAppBarFixedAdjust>
             <Main>
               <Route exact path="/" component={DeviceList}/>
-              <Route exact path="/input" component={DeviceInput}/>
+              <Route exact path="/update/:deviceId" component={DeviceInput}/>
+              <Route exact path="/new" component={DeviceInput}/>
             </Main>
           </TopAppBarFixedAdjust>
         </Root>
