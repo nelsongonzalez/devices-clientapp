@@ -15,45 +15,49 @@ class DeviceInput extends Component {
     this.changeSystemName = this.changeSystemName.bind(this);
     this.changeType = this.changeType.bind(this);
     this.changeHddCapacity = this.changeHddCapacity.bind(this);
+    this.handleSave = this.handleSave.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
   render() {
     return (
-      <div>
-        <TextField
-          label='System Name'
-          outlined>
-          <Input
-            value={this.state.systemName}
-            onChange={this.changeSystemName}/>
-        </TextField>
-
-        <Select
-          label='Type'
-          value={this.state.type}
-          outlined
-          onChange={this.changeType}>
-          <option value='ww'>Windows Workstation</option>
-          <option value='ws'>Windows Server</option>
-          <option value='m'>Mac</option>
-        </Select>
-
-        <TextField
-          label='HDD Capacity (GB)'
-          outlined>
-          <Input
-            value={this.state.hddCapacity}
-            onChange={this.changeHddCapacity}/>
-        </TextField>
-
-        <Button
-          outlined>
-          Save
-        </Button>
-        <Button>
-          Close
-        </Button>
-      </div>
+      <Root>
+        <Grid>
+          <GridContent>
+            <GridCell>
+              <TextField label='System Name' outlined>
+                <Input value={this.state.systemName} onChange={this.changeSystemName}/>
+              </TextField>
+            </GridCell>
+          </GridContent>
+          <GridContent>
+            <GridCell>
+              <Select label='Type' value={this.state.type} outlined onChange={this.changeType}>
+                <option value='ww'>Windows Workstation</option>
+                <option value='ws'>Windows Server</option>
+                <option value='m'>Mac</option>
+              </Select>
+            </GridCell>
+          </GridContent>
+          <GridContent>
+            <GridCell>
+              <TextField label='HDD Capacity (GB)' outlined>
+                <Input value={this.state.hddCapacity} onChange={this.changeHddCapacity}/>
+              </TextField>
+            </GridCell>
+          </GridContent>
+          <GridContent>
+            <GridCell>
+              <Button onClick={this.handleSave} outlined>
+                Save
+              </Button>
+              <Button onClick={this.handleClose}>
+                Close
+              </Button>
+            </GridCell>
+          </GridContent>
+        </Grid>
+      </Root>
     );
   }
 
@@ -68,6 +72,37 @@ class DeviceInput extends Component {
   changeHddCapacity(e) {
     this.setState({hddCapacity: e.target.value});
   }
+
+  handleSave(e) {
+  }
+
+  handleClose(e) {
+  }
+
 }
+
+const Root = (props) => (
+  <div {...props}>
+
+  </div>
+);
+
+const Grid = (props) => (
+  <div className="demo-grid mdc-layout-grid" {...props}>
+
+  </div>
+);
+
+const GridContent = (props) => (
+  <div className="mdc-layout-grid__inner" {...props}>
+
+  </div>
+);
+
+const GridCell = (props) => (
+  <div className="demo-cell mdc-layout-grid__cell mdc-layout-grid__cell--span-12" {...props}>
+
+  </div>
+);
 
 export default DeviceInput;

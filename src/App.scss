@@ -9,7 +9,6 @@
 @import '@material/typography/mdc-typography';
 @import '@material/theme/mdc-theme';
 @import '@material/list/mdc-list';
+@import '@material/layout-grid/mdc-layout-grid';
 
-// mixins
-@import '@material/top-app-bar/mixins';
-@import '@material/shape/mixins';
+@import "./theme";

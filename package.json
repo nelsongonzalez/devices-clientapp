@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material/layout-grid": "^0.41.0",
     "@material/list": "^0.41.0",
     "@material/react-button": "^0.6.1",
     "@material/react-material-icon": "^0.6.1",
@@ -13,10 +14,9 @@
     "@material/theme": "^0.41.0",
     "@material/top-app-bar": "^0.41.0",
     "@material/typography": "^0.41.0",
-    "axios": "^0.18.0",
-    "material-design-icons": "^3.0.1",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
+    "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1"
   },
   "scripts": {

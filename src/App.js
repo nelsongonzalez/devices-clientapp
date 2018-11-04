@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import TopAppBar, { TopAppBarFixedAdjust } from '@material/react-top-app-bar';
 import DeviceList from './Devices/List';
 import DeviceInput from './Devices/Input';
@@ -7,16 +8,37 @@ import DeviceInput from './Devices/Input';
 class App extends Component {
   render() {
     return (
-      <div className='mdc-typography'>
-        <TopAppBar
-          title='Devices'/>
-        <TopAppBarFixedAdjust>
-          <DeviceList/>
-          <DeviceInput/>
-        </TopAppBarFixedAdjust>
-      </div>
+      <Router>
+        <Root>
+          <TopAppBar
+            title='Devices'/>
+          <TopAppBarFixedAdjust>
+            <Main>
+              <Route exact path="/" component={DeviceList}/>
+              <Route exact path="/input" component={DeviceInput}/>
+            </Main>
+            <Link to="/input/">Nuevo</Link>
+          </TopAppBarFixedAdjust>
+        </Root>
+      </Router>
     );
   }
 }
+
+const Root = (props) => (
+  <div className='mdc-typography' {...props}>
+
+  </div>
+);
+
+const Main = (props) => (
+  <div className="mdc-layout-grid max-width">
+    <div className="mdc-layout-grid__inner">
+      <div className="mdc-layout-grid__cell mdc-layout-grid__cell--span-12" {...props}>
+
+      </div>
+    </div>
+  </div>
+);
 
 export default App;
