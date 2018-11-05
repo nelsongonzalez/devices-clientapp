@@ -9,13 +9,13 @@ class DeviceList extends Component {
     super(props);
     this.state = {
       devices: undefined,
-      filteredDevices: undefined,
       filterByType: 'ALL',
       sortBy: 'SYSTEM_NAME',
     };
     this._changeFilterByType = this._changeFilterByType.bind(this);
     this._changeSortBy = this._changeSortBy.bind(this);
     this._sortDevices = this._sortDevices.bind(this);
+    this._filterDevices = this._filterDevices.bind(this);
   }
 
   render() {
@@ -39,17 +39,18 @@ class DeviceList extends Component {
           </GridContent>
           <GridContent>
             <List>
-              {this.state.filteredDevices ? (
-                this.state.filteredDevices
+              {this.state.devices ? (
+                this.state.devices
+                  .filter(this._filterDevices)
                   .sort(this._sortDevices)
                   .map((device) => (
-                  <ListItem key={device.id} props={{
-                    id: device.id,
-                    systemName: device.system_name,
-                    type: device.type,
-                    hddCapacity: device.hdd_capacity
-                  }}/>
-                ))
+                    <ListItem key={device.id} props={{
+                      id: device.id,
+                      systemName: device.system_name,
+                      type: device.type,
+                      hddCapacity: device.hdd_capacity
+                    }}/>
+                  ))
               ) : (
                 <div/>
               )}
@@ -64,29 +65,23 @@ class DeviceList extends Component {
     fetch('http://localhost:3000/devices')
       .then((response) => response.json())
       .then((devices) => {
-        this.setState({devices: devices, filteredDevices: this._filterDevices("ALL", devices)})
+        this.setState({devices: devices})
       });
   };
 
   _changeFilterByType(event) {
-    if (this.state.filterByType === event.target.value) {
-      return;
-    }
-    this.setState({
-      filterByType: event.target.value,
-      filteredDevices: this._filterDevices(event.target.value, this.state.devices)
-    });
+    this.setState({filterByType: event.target.value});
   }
 
-  _changeSortBy(e) {
-    this.setState({sortBy: e.target.value});
+  _changeSortBy(event) {
+    this.setState({sortBy: event.target.value});
   }
 
-  _filterDevices(filter, devices) {
-    if (filter === "ALL") {
-      return devices;
+  _filterDevices(device) {
+    if (this.state.filterByType === "ALL") {
+      return true;
     }
-    return devices.filter((device) => device.type === filter);
+    return device.type === this.state.filterByType;
   }
 
   _sortDevices(deviceA, deviceB) {
