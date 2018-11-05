@@ -5,17 +5,15 @@ import MaterialIcon from '@material/react-material-icon';
 
 class DeviceList extends Component {
 
-  state = {
-    devices: {}
-  };
-
   constructor(props) {
     super(props);
     this.state = {
-      deviceType: 'WINDOWS_WORKSTATION',
+      devices: [],
+      filteredDevices: [],
+      filterByType: 'ALL',
       sortBy: 'HDD_CAPACITY',
     };
-    this._changeDeviceType = this._changeDeviceType.bind(this);
+    this._changeFilterByType = this._changeFilterByType.bind(this);
     this._changeSortBy = this._changeSortBy.bind(this);
   }
 
@@ -25,7 +23,9 @@ class DeviceList extends Component {
         <Grid>
           <GridContent>
             <GridCell>
-              <Select label='Device type' value={this.state.deviceType} outlined onChange={this._changeDeviceType}>
+              <Select label='Device type' value={this.state.filterByType} outlined
+                      onChange={this._changeFilterByType}>
+                <option value='ALL'>All</option>
                 <option value='WINDOWS_WORKSTATION'>Windows Workstation</option>
                 <option value='WINDOWS_SERVER'>Windows Server</option>
                 <option value='MAC'>Mac</option>
@@ -37,8 +37,8 @@ class DeviceList extends Component {
           </GridContent>
           <GridContent>
             <List>
-              {this.state.devices ? (
-                this.state.devices.map((device) => (
+              {this.state.filteredDevices ? (
+                this.state.filteredDevices.map((device) => (
                   <ListItem key={device.id} props={{
                     id: device.id,
                     systemName: device["system_name"],
@@ -60,16 +60,29 @@ class DeviceList extends Component {
     fetch('http://localhost:3000/devices')
       .then((response) => response.json())
       .then((devices) => {
-        this.setState({devices: devices})
+        this.setState({devices: devices, filteredDevices: this._filterDevices("ALL", devices)})
       });
   };
 
-  _changeDeviceType(e) {
-    this.setState({type: e.target.deviceType});
+  _changeFilterByType(event) {
+    if (this.state.filterByType === event.target.value) {
+      return;
+    }
+    this.setState({
+      filterByType: event.target.value,
+      filteredDevices: this._filterDevices(event.target.value, this.state.devices)
+    });
   }
 
   _changeSortBy(e) {
-    this.setState({type: e.target.sortBy});
+    this.setState({sortBy: e.target.value});
+  }
+
+  _filterDevices(filter, devices) {
+    if (filter === "ALL") {
+      return devices;
+    }
+    return devices.filter((d) => d.type === filter);
   }
 
 }

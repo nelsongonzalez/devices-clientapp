@@ -11,3 +11,4 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ## Bugs
 - [ ] Call devices list service when creates or updates a device.
+- [ ] OnChenge event of Select component is firing twice.
