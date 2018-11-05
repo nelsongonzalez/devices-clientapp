@@ -8,13 +8,14 @@ class DeviceList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      devices: [],
-      filteredDevices: [],
+      devices: undefined,
+      filteredDevices: undefined,
       filterByType: 'ALL',
-      sortBy: 'HDD_CAPACITY',
+      sortBy: 'SYSTEM_NAME',
     };
     this._changeFilterByType = this._changeFilterByType.bind(this);
     this._changeSortBy = this._changeSortBy.bind(this);
+    this._sortDevices = this._sortDevices.bind(this);
   }
 
   render() {
@@ -31,19 +32,22 @@ class DeviceList extends Component {
                 <option value='MAC'>Mac</option>
               </Select>
               <Select label='Sort by' value={this.state.sortBy} outlined onChange={this._changeSortBy}>
-                <option value='HDD_CAPACITY'>HDD Capacity</option>
+                <option value='SYSTEM_NAME'>System Name</option>
+                <option value='HDD_CAPACITY_ASC'>HDD Capacity (ascending)</option>
               </Select>
             </GridCell>
           </GridContent>
           <GridContent>
             <List>
               {this.state.filteredDevices ? (
-                this.state.filteredDevices.map((device) => (
+                this.state.filteredDevices
+                  .sort(this._sortDevices)
+                  .map((device) => (
                   <ListItem key={device.id} props={{
                     id: device.id,
-                    systemName: device["system_name"],
+                    systemName: device.system_name,
                     type: device.type,
-                    hddCapacity: device["hdd_capacity"]
+                    hddCapacity: device.hdd_capacity
                   }}/>
                 ))
               ) : (
@@ -82,7 +86,14 @@ class DeviceList extends Component {
     if (filter === "ALL") {
       return devices;
     }
-    return devices.filter((d) => d.type === filter);
+    return devices.filter((device) => device.type === filter);
+  }
+
+  _sortDevices(deviceA, deviceB) {
+    if (this.state.sortBy === "SYSTEM_NAME") {
+      return deviceA.system_name.localeCompare(deviceB.system_name);
+    }
+    return Number(deviceA.hdd_capacity) - Number(deviceB.hdd_capacity);
   }
 
 }

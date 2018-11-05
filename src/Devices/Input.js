@@ -68,7 +68,7 @@ class DeviceInput extends Component {
       fetch(`http://localhost:3000/devices/${this.state.deviceId}`)
         .then((response) => response.json())
         .then((device) => {
-          this.setState({systemName: device["system_name"], type: device.type, hddCapacity: device["hdd_capacity"]});
+          this.setState({systemName: device.system_name, type: device.type, hddCapacity: device.hdd_capacity});
         });
     } else {
       this.setState({systemName: "", type: "", hddCapacity: ""});
