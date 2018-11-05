@@ -148,9 +148,9 @@ const Dialog = (props) => (
        aria-describedby="my-dialog-content">
     <div className="mdc-dialog__container">
       <div className="mdc-dialog__surface">
-        <h2 className="mdc-dialog__title" id="my-dialog-title">Delete device</h2>
+        <h2 className="mdc-dialog__title" id="my-dialog-title">Delete device?</h2>
         <div className="mdc-dialog__content" id="my-dialog-content" {...props}>
-
+          This device will disappear from your list and will not be available anymore.
         </div>
         <footer className="mdc-dialog__actions">
           <button type="button" className="mdc-button mdc-dialog__button" data-mdc-dialog-action="close">Cancel</button>
