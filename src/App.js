@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, withRouter } from "react-router-dom";
 import TopAppBar, { TopAppBarFixedAdjust } from '@material/react-top-app-bar';
+import Fab from '@material/react-fab';
+import MaterialIcon from '@material/react-material-icon';
 import DeviceList from './Devices/List';
 import DeviceInput from './Devices/Input';
 
@@ -18,6 +20,7 @@ class App extends Component {
               <Route exact path="/update/:deviceId" component={DeviceInput}/>
               <Route exact path="/new" component={DeviceInput}/>
             </Main>
+            <FabCreateDevice/>
           </TopAppBarFixedAdjust>
         </Root>
       </Router>
@@ -40,5 +43,11 @@ const Main = (props) => (
     </div>
   </div>
 );
+
+const FabCreateDevice = withRouter(({props, history}) => {
+  return (
+    <Fab icon={<MaterialIcon icon="create"/>} onClick={() => history.push('/new')}/>
+  )
+});
 
 export default App;

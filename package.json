@@ -6,6 +6,7 @@
     "@material/layout-grid": "^0.41.0",
     "@material/list": "^0.41.0",
     "@material/react-button": "^0.6.1",
+    "@material/react-fab": "^0.6.1",
     "@material/react-material-icon": "^0.6.1",
     "@material/react-select": "^0.6.1",
     "@material/react-text-field": "^0.6.1",

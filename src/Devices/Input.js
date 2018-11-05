@@ -71,7 +71,7 @@ class DeviceInput extends Component {
           this.setState({systemName: device.system_name, type: device.type, hddCapacity: device.hdd_capacity});
         });
     } else {
-      this.setState({systemName: "", type: "", hddCapacity: ""});
+      this.setState({systemName: "", type: "WINDOWS_WORKSTATION", hddCapacity: ""});
     }
   };
 
@@ -97,7 +97,18 @@ class DeviceInput extends Component {
   }
 
   _create() {
-
+    console.log("create");
+    fetch('http://localhost:3000/devices', {
+      method: "POST",
+      body: JSON.stringify({
+        system_name: this.state.systemName,
+        type: this.state.type,
+        hdd_capacity: this.state.hddCapacity
+      }),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then((response) => console.log(response));
   }
 
   _update() {

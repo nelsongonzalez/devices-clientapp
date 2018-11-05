@@ -7,14 +7,17 @@
 }
 
 .demo-grid {
-  //background-color: #DDDDDD;
   margin-bottom: 32px;
 }
+
 .demo-cell {
   box-sizing: border-box;
-  //background-color: #666666;
   height: 100px;
   padding: 8px;
-  //color: white;
-  //font-size: 1.5em;
+}
+
+.mdc-fab {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
 }
