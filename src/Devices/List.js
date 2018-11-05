@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import Select from '@material/react-select';
 import MaterialIcon from '@material/react-material-icon';
+import { MDCDialog } from '@material/dialog';
 
 class DeviceList extends Component {
 
@@ -57,6 +58,7 @@ class DeviceList extends Component {
             </List>
           </GridContent>
         </Grid>
+        <Dialog/>
       </Root>
     );
   }
@@ -70,6 +72,8 @@ class DeviceList extends Component {
   };
 
   _changeFilterByType(event) {
+    // const dialog = new MDCDialog(document.querySelector('.mdc-dialog'));
+    // dialog.open();
     this.setState({filterByType: event.target.value});
   }
 
@@ -135,5 +139,28 @@ const ListItem = withRouter(({props, history}) => {
       <MaterialIcon className="mdc-list-item__meta material-icons" icon='more_vert'/>
     </li>)
 });
+
+const Dialog = (props) => (
+  <div className="mdc-dialog"
+       role="alertdialog"
+       aria-modal="true"
+       aria-labelledby="my-dialog-title"
+       aria-describedby="my-dialog-content">
+    <div className="mdc-dialog__container">
+      <div className="mdc-dialog__surface">
+        <h2 className="mdc-dialog__title" id="my-dialog-title">Delete device</h2>
+        <div className="mdc-dialog__content" id="my-dialog-content" {...props}>
+
+        </div>
+        <footer className="mdc-dialog__actions">
+          <button type="button" className="mdc-button mdc-dialog__button" data-mdc-dialog-action="close">Cancel</button>
+          <button type="button" className="mdc-button mdc-dialog__button" data-mdc-dialog-action="accept">Delete
+          </button>
+        </footer>
+      </div>
+    </div>
+    <div className="mdc-dialog__scrim"/>
+  </div>
+);
 
 export default DeviceList;
