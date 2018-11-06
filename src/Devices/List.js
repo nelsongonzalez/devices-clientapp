@@ -65,9 +65,18 @@ class DeviceList extends Component {
 
   componentDidMount() {
     fetch('http://localhost:3000/devices')
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        return response;
+      })
       .then((response) => response.json())
       .then((devices) => {
         this.setState({devices: devices})
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
 

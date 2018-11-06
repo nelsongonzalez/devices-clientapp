@@ -66,12 +66,29 @@ class DeviceInput extends Component {
   componentDidMount() {
     if (this.state.deviceId) {
       fetch(`http://localhost:3000/devices/${this.state.deviceId}`)
+        .then((response) => {
+          if (!response.ok) {
+            throw Error(response.statusText);
+          }
+          return response;
+        })
         .then((response) => response.json())
         .then((device) => {
-          this.setState({systemName: device.system_name, type: device.type, hddCapacity: device.hdd_capacity});
+          this.setState({
+            systemName: device.system_name,
+            type: device.type,
+            hddCapacity: device.hdd_capacity
+          });
+        })
+        .catch((error) => {
+          console.log(error);
         });
     } else {
-      this.setState({systemName: "", type: "WINDOWS_WORKSTATION", hddCapacity: ""});
+      this.setState({
+        systemName: "",
+        type: "WINDOWS_WORKSTATION",
+        hddCapacity: ""
+      });
     }
   };
 
@@ -108,7 +125,17 @@ class DeviceInput extends Component {
       headers: {
         "Content-Type": "application/json"
       }
-    }).then((response) => console.log(response));
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        return response;
+      })
+      .then((response) => console.log(response))
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   _update() {
@@ -122,7 +149,17 @@ class DeviceInput extends Component {
       headers: {
         "Content-Type": "application/json"
       }
-    }).then((response) => console.log(response));
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        return response;
+      })
+      .then((response) => console.log(response))
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   _handleClose() {
