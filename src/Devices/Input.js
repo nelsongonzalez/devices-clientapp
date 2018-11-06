@@ -12,7 +12,6 @@ class DeviceInput extends Component {
       type: "WINDOWS_WORKSTATION",
       hddCapacity: "",
       deviceId: props.match.params.deviceId
-      // isNew: /^new/i.test(props.match.path)
     };
     this._changeSystemName = this._changeSystemName.bind(this);
     this._changeType = this._changeType.bind(this);
@@ -114,7 +113,6 @@ class DeviceInput extends Component {
   }
 
   _create() {
-    console.log("create");
     fetch('http://localhost:3000/devices', {
       method: "POST",
       body: JSON.stringify({

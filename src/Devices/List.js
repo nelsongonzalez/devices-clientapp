@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom'
 import Select from '@material/react-select';
 import MaterialIcon from '@material/react-material-icon';
 import { MDCDialog } from '@material/dialog';
@@ -15,8 +14,8 @@ class DeviceList extends Component {
     };
     this._changeFilterByType = this._changeFilterByType.bind(this);
     this._changeSortBy = this._changeSortBy.bind(this);
-    this._sortDevices = this._sortDevices.bind(this);
     this._filterDevices = this._filterDevices.bind(this);
+    this._sortDevices = this._sortDevices.bind(this);
   }
 
   render() {
@@ -49,7 +48,8 @@ class DeviceList extends Component {
                       id: device.id,
                       systemName: device.system_name,
                       type: device.type,
-                      hddCapacity: device.hdd_capacity
+                      hddCapacity: device.hdd_capacity,
+                      history: this.props.history
                     }}/>
                   ))
               ) : (
@@ -78,11 +78,9 @@ class DeviceList extends Component {
       .catch((error) => {
         console.log(error);
       });
-  };
+  }
 
   _changeFilterByType(event) {
-    // const dialog = new MDCDialog(document.querySelector('.mdc-dialog'));
-    // dialog.open();
     this.setState({filterByType: event.target.value});
   }
 
@@ -138,16 +136,65 @@ const List = (props) => (
   </div>
 );
 
-const ListItem = withRouter(({props, history}) => {
-  return (
-    <li className="mdc-list-item" onClick={() => history.push(`/update/${props.id}`)}>
+class ListItem extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = props.props;
+    this._deleteDevice = this._deleteDevice.bind(this);
+  }
+
+  render() {
+    return (
+      <li className="mdc-list-item" onClick={() => this.props.props.history.push(`/update/${this.state.id}`)}>
       <span className="mdc-list-item__text">
-        <span className="mdc-list-item__primary-text">{props.systemName}</span>
-        <span className="mdc-list-item__secondary-text">{props.type} - {props.hddCapacity}GB</span>
+        <span className="mdc-list-item__primary-text">{this.state.systemName}</span>
+        <span className="mdc-list-item__secondary-text">{this.state.type} - {this.state.hddCapacity}GB</span>
       </span>
-      <MaterialIcon className="mdc-list-item__meta material-icons" icon='more_vert'/>
-    </li>)
-});
+        <MaterialIcon className="mdc-list-item__meta material-icons" icon='more_vert' onClick={(event) => {
+          event.stopPropagation();
+          const mdcDialog = new MDCDialog(document.querySelector('.mdc-dialog'));
+          mdcDialog.listen('MDCDialog:closed', this._deleteDevice);
+          mdcDialog.open();
+        }}/>
+      </li>)
+  }
+
+  _deleteDevice(event) {
+    const mdcDialog = new MDCDialog(document.querySelector('.mdc-dialog'));
+    mdcDialog.unlisten('MDCDialog:closed', this._deleteDevice);
+    if (event.detail.action === "accept") {
+      fetch(`http://localhost:3000/devices/${this.state.id}`, {
+        method: "DELETE"
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw Error(response.statusText);
+          }
+          return response;
+        })
+        .then((response) => console.log(response))
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }
+}
+
+// const ListItem = withRouter(({props, history}) => {
+//   return (
+//     <li className="mdc-list-item" onClick={() => history.push(`/update/${props.id}`)}>
+//       <span className="mdc-list-item__text">
+//         <span className="mdc-list-item__primary-text">{props.systemName}</span>
+//         <span className="mdc-list-item__secondary-text">{props.type} - {props.hddCapacity}GB</span>
+//       </span>
+//       <MaterialIcon className="mdc-list-item__meta material-icons" icon='more_vert' onClick={(event) => {
+//         event.stopPropagation();
+//         console.log(props.id);
+//         new MDCDialog(document.querySelector('.mdc-dialog')).open();
+//       }}/>
+//     </li>)
+// });
 
 const Dialog = (props) => (
   <div className="mdc-dialog"
@@ -163,7 +210,8 @@ const Dialog = (props) => (
         </div>
         <footer className="mdc-dialog__actions">
           <button type="button" className="mdc-button mdc-dialog__button" data-mdc-dialog-action="close">Cancel</button>
-          <button type="button" className="mdc-button mdc-dialog__button" data-mdc-dialog-action="accept">Delete
+          <button type="button" className="mdc-button mdc-dialog__button mdc-dialog__button--default"
+                  data-mdc-dialog-action="accept">Delete
           </button>
         </footer>
       </div>

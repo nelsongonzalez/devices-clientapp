@@ -15,9 +15,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 - [ ] Add some tests.
 - [ ] Validate form.
-- [ ] `fetch` errors handling.
-
-## Bugs
-
+- [x] `fetch` errors handling.
+- [ ] Refactor components.
+- [ ] Hide FAB when view is not the list.
 - [ ] Call devices list service when creates or updates a device.
-- [x] OnChenge event of Select component is firing twice.
