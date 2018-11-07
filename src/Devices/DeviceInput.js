@@ -50,7 +50,11 @@ class DeviceInput extends Component {
             <Cell columns={12} className='field'>
               <TextField label='HDD Capacity (GB)' outlined>
                 <Input value={this.state.hddCapacity}
-                       onChange={(event) => this.setState({hddCapacity: event.target.value})}/>
+                       onChange={(event) => {
+                         if (this._isNumber(event.target.value)) {
+                           this.setState({hddCapacity: event.target.value})
+                         }
+                       }}/>
               </TextField>
             </Cell>
           </Row>
@@ -133,6 +137,10 @@ class DeviceInput extends Component {
 
   _handleClose() {
     this.props.history.push('/');
+  }
+
+  _isNumber(value) {
+    return !isNaN(value);
   }
 
 }
