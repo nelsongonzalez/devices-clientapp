@@ -22,9 +22,12 @@ class DeviceList extends Component {
     return (
       <Main>
         <Grid>
+
           <Row>
             <Cell columns={12}>
-              <Select label='Device type' value={this.state.filterByType}
+
+              <Select label='Device type'
+                      value={this.state.filterByType}
                       outlined
                       onChange={(event) => this.setState({filterByType: event.target.value})}>
                 <option value='ALL'>All</option>
@@ -32,14 +35,17 @@ class DeviceList extends Component {
                 <option value='WINDOWS_SERVER'>Windows Server</option>
                 <option value='MAC'>Mac</option>
               </Select>
+
               <Select label='Sort by' value={this.state.sortBy}
                       outlined
                       onChange={(event) => this.setState({sortBy: event.target.value})}>
                 <option value='SYSTEM_NAME'>System Name</option>
                 <option value='HDD_CAPACITY_ASC'>HDD Capacity (ascending)</option>
               </Select>
+
             </Cell>
           </Row>
+
           <Row>
             <Cell columns={12}>
               <List twoLine>
@@ -62,6 +68,7 @@ class DeviceList extends Component {
               </List>
             </Cell>
           </Row>
+
         </Grid>
         <Dialog/>
       </Main>

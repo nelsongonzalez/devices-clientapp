@@ -35,6 +35,7 @@ class DeviceListItem extends Component {
     mdcDialog.unlisten('MDCDialog:closed', this._deleteDevice);
     console.log(this.props);
     if (event.detail.action === 'accept') {
+
       deleteDevice(this.state.id)
         .then((response) => console.log(response))
         .catch((error) => {

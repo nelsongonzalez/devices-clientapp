@@ -39,6 +39,7 @@ const deleteDevice = (deviceId) => {
 
 const _handleException = (response) => {
   if (!response.ok) {
+
     throw Error(response.statusText);
   }
   return response;

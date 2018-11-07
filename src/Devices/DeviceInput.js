@@ -23,6 +23,7 @@ class DeviceInput extends Component {
     return (
       <Main>
         <Grid className='form'>
+
           <Row>
             <Cell columns={12} className='field'>
               <TextField label='System Name' outlined>
@@ -31,6 +32,7 @@ class DeviceInput extends Component {
               </TextField>
             </Cell>
           </Row>
+
           <Row>
             <Cell columns={12} className='field'>
               <Select label='Type' value={this.state.type} outlined
@@ -41,6 +43,7 @@ class DeviceInput extends Component {
               </Select>
             </Cell>
           </Row>
+
           <Row>
             <Cell columns={12} className='field'>
               <TextField label='HDD Capacity (GB)' outlined>
@@ -49,6 +52,7 @@ class DeviceInput extends Component {
               </TextField>
             </Cell>
           </Row>
+
           <Row>
             <Cell columns={12} className='field'>
               <Button onClick={this._handleSave} outlined>
@@ -59,6 +63,7 @@ class DeviceInput extends Component {
               </Button>
             </Cell>
           </Row>
+
         </Grid>
       </Main>
     );
@@ -66,6 +71,7 @@ class DeviceInput extends Component {
 
   componentDidMount() {
     if (this.state.deviceId) {
+
       getDevice(this.state.deviceId)
         .then((response) => response.json())
         .then((device) => {
@@ -79,6 +85,7 @@ class DeviceInput extends Component {
           console.log(error);
         });
     } else {
+
       this.setState({
         systemName: '',
         type: 'WINDOWS_WORKSTATION',
@@ -89,8 +96,10 @@ class DeviceInput extends Component {
 
   _handleSave() {
     if (this.state.deviceId) {
+
       this._update();
     } else {
+
       this._create();
     }
     this.props.history.push('/');
