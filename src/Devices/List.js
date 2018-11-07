@@ -163,6 +163,7 @@ class ListItem extends Component {
   _deleteDevice(event) {
     const mdcDialog = new MDCDialog(document.querySelector('.mdc-dialog'));
     mdcDialog.unlisten('MDCDialog:closed', this._deleteDevice);
+    console.log(this.props);
     if (event.detail.action === "accept") {
       fetch(`http://localhost:3000/devices/${this.state.id}`, {
         method: "DELETE"
@@ -178,23 +179,9 @@ class ListItem extends Component {
           console.log(error);
         });
     }
+    this.props.props.history.replace('/');
   }
 }
-
-// const ListItem = withRouter(({props, history}) => {
-//   return (
-//     <li className="mdc-list-item" onClick={() => history.push(`/update/${props.id}`)}>
-//       <span className="mdc-list-item__text">
-//         <span className="mdc-list-item__primary-text">{props.systemName}</span>
-//         <span className="mdc-list-item__secondary-text">{props.type} - {props.hddCapacity}GB</span>
-//       </span>
-//       <MaterialIcon className="mdc-list-item__meta material-icons" icon='more_vert' onClick={(event) => {
-//         event.stopPropagation();
-//         console.log(props.id);
-//         new MDCDialog(document.querySelector('.mdc-dialog')).open();
-//       }}/>
-//     </li>)
-// });
 
 const Dialog = (props) => (
   <div className="mdc-dialog"
