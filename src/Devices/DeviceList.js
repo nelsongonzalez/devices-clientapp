@@ -4,6 +4,7 @@ import { Cell, Grid, Row } from '@material/react-layout-grid';
 import List from '@material/react-list';
 import DeviceListItem from './DeviceListItem';
 import { allDevices } from './DeviceServices';
+import DeleteConfirmationDialog from './DeleteConfirmationDialog';
 
 class DeviceList extends Component {
 
@@ -70,7 +71,7 @@ class DeviceList extends Component {
           </Row>
 
         </Grid>
-        <Dialog/>
+        <DeleteConfirmationDialog/>
       </Main>
     );
   }
@@ -105,30 +106,6 @@ class DeviceList extends Component {
 const Main = (props) => (
   <div {...props}>
 
-  </div>
-);
-
-const Dialog = (props) => (
-  <div className='mdc-dialog'
-       role='alertdialog'
-       aria-modal='true'
-       aria-labelledby='my-dialog-title'
-       aria-describedby='my-dialog-content'>
-    <div className='mdc-dialog__container'>
-      <div className='mdc-dialog__surface'>
-        <h2 className='mdc-dialog__title' id='my-dialog-title'>Delete device?</h2>
-        <div className='mdc-dialog__content' id='my-dialog-content' {...props}>
-          This device will disappear from your list and will not be available anymore.
-        </div>
-        <footer className='mdc-dialog__actions'>
-          <button type='button' className='mdc-button mdc-dialog__button' data-mdc-dialog-action='close'>Cancel</button>
-          <button type='button' className='mdc-button mdc-dialog__button mdc-dialog__button--default'
-                  data-mdc-dialog-action='accept'>Delete
-          </button>
-        </footer>
-      </div>
-    </div>
-    <div className='mdc-dialog__scrim'/>
   </div>
 );
 
