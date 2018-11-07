@@ -8,16 +8,19 @@ class DeviceListItem extends Component {
 
   constructor(props) {
     super(props);
-    this.state = props.props;
-    this.state.description = `${props.props.type} - ${props.props.hddCapacity} GB`;
+    this.state = {
+      device: props.device,
+      description: `${props.device.type} - ${props.device.hddCapacity} GB`
+    };
     this._deleteDevice = this._deleteDevice.bind(this);
+    this.onDelete = props.onDelete;
   }
 
   render() {
     return (
-      <ListItem onClick={() => this.props.props.history.push(`/update/${this.state.id}`)}>
+      <ListItem onClick={() => this.props.history.push(`/update/${this.state.device.id}`)}>
         <ListItemText
-          primaryText={this.state.systemName}
+          primaryText={this.state.device.systemName}
           secondaryText={this.state.description}/>
         <ListItemMeta meta='delete' graphic={<MaterialIcon icon='delete'/>} onClick={(event) => {
           event.stopPropagation();
@@ -33,16 +36,14 @@ class DeviceListItem extends Component {
   _deleteDevice(event) {
     const mdcDialog = new MDCDialog(document.querySelector('.mdc-dialog'));
     mdcDialog.unlisten('MDCDialog:closed', this._deleteDevice);
-    console.log(this.props);
     if (event.detail.action === 'accept') {
 
-      deleteDevice(this.state.id)
-        .then((response) => console.log(response))
+      deleteDevice(this.state.device.id)
+        .then(() => this.onDelete())
         .catch((error) => {
           console.log(error);
         });
     }
-    this.props.props.history.replace('/');
   }
 }
 

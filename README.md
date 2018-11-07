@@ -16,6 +16,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 - [ ] Add some tests.
 - [ ] Validate form.
 - [x] `fetch` errors handling.
-- [ ] Refactor components.
-- [ ] Hide FAB when view is not the list.
-- [ ] Call devices list service when creates or updates a device.
+- [x] Refactor components.
+- [x] Hide FAB when view is not the list.
+- [x] Call devices list service when creates or updates a device.

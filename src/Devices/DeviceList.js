@@ -3,20 +3,23 @@ import Select from '@material/react-select';
 import { Cell, Grid, Row } from '@material/react-layout-grid';
 import List from '@material/react-list';
 import DeviceListItem from './DeviceListItem';
-import { allDevices } from './DeviceServices';
 import DeleteConfirmationDialog from './DeleteConfirmationDialog';
+import { withRouter } from "react-router-dom";
+import Fab from "@material/react-fab";
+import MaterialIcon from "@material/react-material-icon";
 
 class DeviceList extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      devices: undefined,
+      devices: props.devices,
       filterByType: 'ALL',
       sortBy: 'SYSTEM_NAME',
     };
     this._filterDevices = this._filterDevices.bind(this);
     this._sortDevices = this._sortDevices.bind(this);
+    this.onDelete = props.onDelete;
   }
 
   render() {
@@ -55,13 +58,12 @@ class DeviceList extends Component {
                     .filter(this._filterDevices)
                     .sort(this._sortDevices)
                     .map((device) => (
-                      <DeviceListItem key={device.id} props={{
+                      <DeviceListItem key={device.id} device={{
                         id: device.id,
                         systemName: device.system_name,
                         type: device.type,
                         hddCapacity: device.hdd_capacity,
-                        history: this.props.history
-                      }}/>
+                      }} history={this.props.history} onDelete={this.onDelete}/>
                     ))
                 ) : (
                   <div/>
@@ -72,19 +74,9 @@ class DeviceList extends Component {
 
         </Grid>
         <DeleteConfirmationDialog/>
+        <FabCreateDevice/>
       </Main>
     );
-  }
-
-  componentDidMount() {
-    allDevices()
-      .then((response) => response.json())
-      .then((devices) => {
-        this.setState({devices: devices})
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   }
 
   _filterDevices(device) {
@@ -108,5 +100,11 @@ const Main = (props) => (
 
   </div>
 );
+
+const FabCreateDevice = withRouter(({props, history}) => {
+  return (
+    <Fab icon={<MaterialIcon icon='create'/>} onClick={() => history.push('/new')}/>
+  )
+});
 
 export default DeviceList;

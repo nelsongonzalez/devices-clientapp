@@ -17,6 +17,8 @@ class DeviceInput extends Component {
     };
     this._handleSave = this._handleSave.bind(this);
     this._handleClose = this._handleClose.bind(this);
+    this.onUpdate = props.onUpdate;
+    this.onCreate = props.onCreate;
   }
 
   render() {
@@ -111,7 +113,7 @@ class DeviceInput extends Component {
       type: this.state.type,
       hdd_capacity: this.state.hddCapacity
     })
-      .then((response) => console.log(response))
+      .then(() => this.onCreate())
       .catch((error) => {
         console.log(error);
       });
@@ -123,7 +125,7 @@ class DeviceInput extends Component {
       type: this.state.type,
       hdd_capacity: this.state.hddCapacity
     })
-      .then((response) => console.log(response))
+      .then(() => this.onUpdate())
       .catch((error) => {
         console.log(error);
       });

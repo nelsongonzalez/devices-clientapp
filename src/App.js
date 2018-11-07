@@ -1,14 +1,22 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, withRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import TopAppBar, { TopAppBarFixedAdjust } from '@material/react-top-app-bar';
-import Fab from '@material/react-fab';
-import MaterialIcon from '@material/react-material-icon';
 import { Cell, Grid, Row } from '@material/react-layout-grid';
 import DeviceList from './Devices/DeviceList';
 import DeviceInput from './Devices/DeviceInput';
 import './App.css';
+import { allDevices } from "./Devices/DeviceServices";
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      devices: undefined,
+    };
+    this.getDevices = this.getDevices.bind(this);
+  }
+
   render() {
     return (
       <Router>
@@ -17,15 +25,37 @@ class App extends Component {
             title='Devices'/>
           <TopAppBarFixedAdjust>
             <Content>
-              <Route exact path='/' component={DeviceList}/>
-              <Route exact path='/update/:deviceId' component={DeviceInput}/>
-              <Route exact path='/new' component={DeviceInput}/>
+
+              <Route exact path='/'
+                     component={(props) => <DeviceList devices={this.state.devices}
+                                                       onDelete={this.getDevices} {...props} />}/>
+
+              <Route exact path='/update/:deviceId'
+                     component={(props) => <DeviceInput onUpdate={this.getDevices} {...props}/>}/>
+
+              <Route exact path='/new'
+                     component={(props) => <DeviceInput onCreate={this.getDevices} {...props}/>}/>
+
             </Content>
-            <FabCreateDevice/>
           </TopAppBarFixedAdjust>
         </Main>
       </Router>
     );
+  }
+
+  componentDidMount() {
+    allDevices()
+      .then((response) => response.json())
+      .then((devices) => {
+        this.setState({devices: devices})
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  getDevices() {
+    this.componentDidMount();
   }
 }
 
@@ -44,11 +74,5 @@ const Content = (props) => (
     </Row>
   </Grid>
 );
-
-const FabCreateDevice = withRouter(({props, history}) => {
-  return (
-    <Fab icon={<MaterialIcon icon='create'/>} onClick={() => history.push('/new')}/>
-  )
-});
 
 export default App;
