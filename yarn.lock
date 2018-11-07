@@ -733,6 +733,10 @@
     "@material/typography" "^0.41.0"
     focus-trap "^2.3.0"
 
+"@material/dom@^0.40.0":
+  version "0.40.0"
+  resolved "https://registry.yarnpkg.com/@material/dom/-/dom-0.40.0.tgz#c0bfdf13f76546d35db7492fd6d4167721aac376"
+
 "@material/dom@^0.41.0":
   version "0.41.0"
   resolved "https://registry.yarnpkg.com/@material/dom/-/dom-0.41.0.tgz#6756865f97bad4c91ee75e69d769d7cdc25398ae"
@@ -773,9 +777,9 @@
     "@material/theme" "^0.40.1"
     "@material/typography" "^0.40.1"
 
-"@material/layout-grid@^0.41.0":
-  version "0.41.0"
-  resolved "https://registry.yarnpkg.com/@material/layout-grid/-/layout-grid-0.41.0.tgz#2e7d3be76313e0684d573b10c2c6a88b3230d251"
+"@material/layout-grid@^0.40.1":
+  version "0.40.1"
+  resolved "https://registry.yarnpkg.com/@material/layout-grid/-/layout-grid-0.40.1.tgz#66bbcae895f8650ee48157a770c8cff1b314755c"
 
 "@material/line-ripple@^0.40.1":
   version "0.40.1"
@@ -785,17 +789,17 @@
     "@material/base" "^0.40.1"
     "@material/theme" "^0.40.1"
 
-"@material/list@^0.41.0":
-  version "0.41.0"
-  resolved "https://registry.yarnpkg.com/@material/list/-/list-0.41.0.tgz#b597fd844c9f5661565129db9103e6a08bf23255"
+"@material/list@^0.40.0":
+  version "0.40.1"
+  resolved "https://registry.yarnpkg.com/@material/list/-/list-0.40.1.tgz#0734917212156443868c56fc49f06333cdba7512"
   dependencies:
-    "@material/base" "^0.41.0"
-    "@material/dom" "^0.41.0"
-    "@material/ripple" "^0.41.0"
+    "@material/base" "^0.40.1"
+    "@material/dom" "^0.40.0"
+    "@material/ripple" "^0.40.1"
     "@material/rtl" "^0.40.1"
-    "@material/shape" "^0.41.0"
-    "@material/theme" "^0.41.0"
-    "@material/typography" "^0.41.0"
+    "@material/shape" "^0.40.1"
+    "@material/theme" "^0.40.1"
+    "@material/typography" "^0.40.1"
 
 "@material/notched-outline@^0.40.1":
   version "0.40.1"
@@ -807,98 +811,116 @@
     "@material/shape" "^0.40.1"
     "@material/theme" "^0.40.1"
 
-"@material/react-button@^0.6.1":
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/@material/react-button/-/react-button-0.6.1.tgz#8a8a7fbd05749916656b470cb07a8c92a77e3fa3"
+"@material/react-button@^0.6.2":
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/@material/react-button/-/react-button-0.6.2.tgz#d0f9a6c214d02f60e8c2373116fb83abb6072b30"
   dependencies:
     "@material/button" "^0.40.1"
-    "@material/react-ripple" "^0.6.1"
+    "@material/react-ripple" "^0.6.2"
     classnames "^2.2.5"
     prop-types "^15.6.1"
     react "^16.4.2"
 
-"@material/react-fab@^0.6.1":
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/@material/react-fab/-/react-fab-0.6.1.tgz#93f3b492cdc22fc2ccd2848821e3f22c90a97096"
+"@material/react-fab@^0.6.2":
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/@material/react-fab/-/react-fab-0.6.2.tgz#d59d949c6653b2df77a7d7e9244f32fec1f0c4af"
   dependencies:
     "@material/fab" "^0.40.1"
-    "@material/react-ripple" "^0.6.1"
+    "@material/react-ripple" "^0.6.2"
     classnames "^2.2.5"
     prop-types "^15.6.1"
     react "^16.4.2"
 
-"@material/react-floating-label@^0.6.1":
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/@material/react-floating-label/-/react-floating-label-0.6.1.tgz#0c89bdc7f915489e6ba82bc15d169aba4ba28e87"
+"@material/react-floating-label@^0.6.2":
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/@material/react-floating-label/-/react-floating-label-0.6.2.tgz#5e5118db543a4e8cb452436976eb35077900ce28"
   dependencies:
     "@material/floating-label" "^0.40.1"
     classnames "^2.2.5"
     prop-types "^15.6.1"
     react "^16.4.2"
 
-"@material/react-line-ripple@^0.6.1":
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/@material/react-line-ripple/-/react-line-ripple-0.6.1.tgz#1fa1b553450d57f821424db75c8deb6ad13f9d69"
+"@material/react-layout-grid@^0.6.2":
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/@material/react-layout-grid/-/react-layout-grid-0.6.2.tgz#db26ff78ad88df3621fed33bcca75e53cf4a6725"
+  dependencies:
+    "@material/layout-grid" "^0.40.1"
+    classnames "^2.2.5"
+    prop-types "^15.6.1"
+    react "^16.4.2"
+
+"@material/react-line-ripple@^0.6.2":
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/@material/react-line-ripple/-/react-line-ripple-0.6.2.tgz#294b096d65a94b09c820a1f617771aa3fe3441ce"
   dependencies:
     "@material/line-ripple" "^0.40.1"
     classnames "^2.2.5"
     prop-types "^15.6.1"
     react "^16.4.2"
 
-"@material/react-material-icon@^0.6.1":
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/@material/react-material-icon/-/react-material-icon-0.6.1.tgz#aa0485c692c57d40b1d43c8f8963264964bf701a"
+"@material/react-list@^0.6.2":
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/@material/react-list/-/react-list-0.6.2.tgz#bebecacdd27aad69d8617f5b99670b78133fe031"
   dependencies:
-    "@material/react-ripple" "^0.6.1"
+    "@material/list" "^0.40.0"
     classnames "^2.2.5"
     prop-types "^15.6.1"
     react "^16.4.2"
 
-"@material/react-notched-outline@^0.6.1":
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/@material/react-notched-outline/-/react-notched-outline-0.6.1.tgz#aee942fa619b7deb9634b904eaadba2d98cbf6e3"
+"@material/react-material-icon@^0.6.2":
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/@material/react-material-icon/-/react-material-icon-0.6.2.tgz#8ad8a6665a4b0559aabbe478a9892ae3158dfc11"
+  dependencies:
+    "@material/react-ripple" "^0.6.2"
+    classnames "^2.2.5"
+    prop-types "^15.6.1"
+    react "^16.4.2"
+
+"@material/react-notched-outline@^0.6.2":
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/@material/react-notched-outline/-/react-notched-outline-0.6.2.tgz#f7c0827a7392969aaae0b50dfd0c68d4a01acfeb"
   dependencies:
     "@material/notched-outline" "^0.40.1"
     classnames "^2.2.5"
     prop-types "^15.6.1"
     react "^16.4.2"
 
-"@material/react-ripple@^0.6.1":
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/@material/react-ripple/-/react-ripple-0.6.1.tgz#caa61dff42bf9281ea223a296550917f5c8b7d88"
+"@material/react-ripple@^0.6.2":
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/@material/react-ripple/-/react-ripple-0.6.2.tgz#94c3c0e16c9bc772a0b6482a34655b1e31e00a05"
   dependencies:
     "@material/ripple" "^0.40.1"
     classnames "^2.2.5"
     prop-types "^15.6.1"
     react "^16.4.2"
 
-"@material/react-select@^0.6.1":
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/@material/react-select/-/react-select-0.6.1.tgz#a8d2f5e182146de6662e2059818e2d2871b9a249"
+"@material/react-select@^0.6.2":
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/@material/react-select/-/react-select-0.6.2.tgz#eabad5f2488008f7c8e55853d8398a001a5bc322"
   dependencies:
-    "@material/react-floating-label" "^0.6.1"
-    "@material/react-line-ripple" "^0.6.1"
-    "@material/react-notched-outline" "^0.6.1"
+    "@material/react-floating-label" "^0.6.2"
+    "@material/react-line-ripple" "^0.6.2"
+    "@material/react-notched-outline" "^0.6.2"
     "@material/select" "^0.40.1"
     classnames "^2.2.5"
     prop-types "^15.6.1"
     react "^16.4.2"
 
-"@material/react-text-field@^0.6.1":
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/@material/react-text-field/-/react-text-field-0.6.1.tgz#79f74fbebf20f63cdf87c8b64d62b77a6f6a8ab7"
+"@material/react-text-field@^0.6.2":
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/@material/react-text-field/-/react-text-field-0.6.2.tgz#563a6c9d84912201a25b2bf022ad19a77252e188"
   dependencies:
-    "@material/react-floating-label" "^0.6.1"
-    "@material/react-line-ripple" "^0.6.1"
-    "@material/react-notched-outline" "^0.6.1"
+    "@material/react-floating-label" "^0.6.2"
+    "@material/react-line-ripple" "^0.6.2"
+    "@material/react-notched-outline" "^0.6.2"
     "@material/textfield" "^0.40.1"
     classnames "^2.2.5"
     prop-types "^15.6.1"
     react "^16.4.2"
 
-"@material/react-top-app-bar@^0.6.1":
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/@material/react-top-app-bar/-/react-top-app-bar-0.6.1.tgz#e8df02108a34b0cf4d8cdc05173d1e943ff22524"
+"@material/react-top-app-bar@^0.6.2":
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/@material/react-top-app-bar/-/react-top-app-bar-0.6.2.tgz#a3ca280c4f8b43d6b65160c717684c617500725d"
   dependencies:
     "@material/top-app-bar" "^0.40.1"
     classnames "^2.2.5"
@@ -983,19 +1005,6 @@
     "@material/shape" "^0.40.1"
     "@material/theme" "^0.40.1"
     "@material/typography" "^0.40.1"
-
-"@material/top-app-bar@^0.41.0":
-  version "0.41.0"
-  resolved "https://registry.yarnpkg.com/@material/top-app-bar/-/top-app-bar-0.41.0.tgz#03a63bb044ad405c7abafa2e335809aa5dddcccb"
-  dependencies:
-    "@material/animation" "^0.41.0"
-    "@material/base" "^0.41.0"
-    "@material/elevation" "^0.41.0"
-    "@material/ripple" "^0.41.0"
-    "@material/rtl" "^0.40.1"
-    "@material/shape" "^0.41.0"
-    "@material/theme" "^0.41.0"
-    "@material/typography" "^0.41.0"
 
 "@material/typography@^0.40.1":
   version "0.40.1"
