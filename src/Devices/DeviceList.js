@@ -4,7 +4,6 @@ import { Cell, Grid, Row } from '@material/react-layout-grid';
 import List from '@material/react-list';
 import DeviceListItem from './DeviceListItem';
 import DeleteConfirmationDialog from './DeleteConfirmationDialog';
-import { withRouter } from "react-router-dom";
 import Fab from "@material/react-fab";
 import MaterialIcon from "@material/react-material-icon";
 
@@ -74,7 +73,7 @@ class DeviceList extends Component {
 
         </Grid>
         <DeleteConfirmationDialog/>
-        <FabCreateDevice/>
+        <Fab icon={<MaterialIcon icon='create'/>} onClick={() => this.props.history.push('/new')}/>
       </Main>
     );
   }
@@ -100,11 +99,5 @@ const Main = (props) => (
 
   </div>
 );
-
-const FabCreateDevice = withRouter(({props, history}) => {
-  return (
-    <Fab icon={<MaterialIcon icon='create'/>} onClick={() => history.push('/new')}/>
-  )
-});
 
 export default DeviceList;
