@@ -32,8 +32,3 @@ Open [http://localhost:3001](http://localhost:3001) to view it in the browser.
 ## TODO
 
 - [ ] Add some tests.
-- [ ] Validate form.
-- [x] `fetch` errors handling.
-- [x] Refactor components.
-- [x] Hide FAB when view is not the list.
-- [x] Call devices list service when creates or updates a device.
