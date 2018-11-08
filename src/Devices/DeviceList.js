@@ -14,7 +14,6 @@ class DeviceList extends Component {
     super(props);
     this.state = {
       devices: props.devices,
-      filterByType: 'ALL',
       sortBy: 'SYSTEM_NAME',
       showAll: true,
       filterByTypes: {
@@ -25,7 +24,7 @@ class DeviceList extends Component {
     };
     this._filterDevices = this._filterDevices.bind(this);
     this._sortDevices = this._sortDevices.bind(this);
-    this._manageState = this._manageState.bind(this);
+    this._manageFilterState = this._manageFilterState.bind(this);
     this.onDelete = props.onDelete;
   }
 
@@ -44,19 +43,19 @@ class DeviceList extends Component {
                 <Checkbox
                   nativeControlId='my-checkbox'
                   checked={this.state.filterByTypes.WINDOWS_WORKSTATION}
-                  onChange={(event, key = 'WINDOWS_WORKSTATION') => this._manageState(event, key)}/>
+                  onChange={(event, key = 'WINDOWS_WORKSTATION') => this._manageFilterState(event, key)}/>
                 <label className='label' htmlFor='my-checkbox'>Windows Workstation</label>
 
                 <Checkbox
                   nativeControlId='my-checkbox1'
                   checked={this.state.filterByTypes.WINDOWS_SERVER}
-                  onChange={(event, key = 'WINDOWS_SERVER') => this._manageState(event, key)}/>
+                  onChange={(event, key = 'WINDOWS_SERVER') => this._manageFilterState(event, key)}/>
                 <label className='label' htmlFor='my-checkbox1'>Windows Server</label>
 
                 <Checkbox
                   nativeControlId='my-checkbox2'
                   checked={this.state.filterByTypes.MAC}
-                  onChange={(event, key = 'MAC') => this._manageState(event, key)}/>
+                  onChange={(event, key = 'MAC') => this._manageFilterState(event, key)}/>
                 <label className='label' htmlFor='my-checkbox2'>Mac</label>
               </FilterPanel>
 
@@ -103,7 +102,7 @@ class DeviceList extends Component {
     );
   }
 
-  _manageState(event, key) {
+  _manageFilterState(event, key) {
     const filterByTypes = this.state.filterByTypes;
     filterByTypes[key] = event.target.checked;
     const showAll = Object
